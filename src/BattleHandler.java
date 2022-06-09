@@ -34,7 +34,7 @@ public class BattleHandler {
 		return damage;
 	}
 	
-	/* Determine bonus based on move type -> target_type WIP
+	/* Determine bonus based on move type -> target_type WORK IN PROGRESS
 	 *  
 	 */
 	public double getTypeMultiplier(String move_type, String target_type)
@@ -46,6 +46,10 @@ public class BattleHandler {
 		return 1.0;
 	}
 	
+	
+	/* Logic for when a pokemon uses a move
+	 * 
+	 */
 	public void useMove(Pokemon user, Pokemon target, Move move)
 	{
 		/* Determine move success
@@ -81,7 +85,7 @@ public class BattleHandler {
 		// Determine move class, move class dictates what pokmeon stat to use in calculation
 		int damage; // variable holding the damage dealt by move
 		
-		// 
+		// If move is an attacking move
 		if (move instanceof AttackMove)
 		{
 			// Physical Attack
@@ -95,10 +99,48 @@ public class BattleHandler {
 			// Special Attack
 			if(move instanceof SpecialAttack)
 			{
-				damage = calcDamage(user.getLevel(), user.getBattle_attack(), target.getBattle_defense(), ((PhysicalAttack) move).getPower(), type_bonus);
+				damage = calcDamage(user.getLevel(), user.getBattle_special_attack(), target.getBattle_special_defense(), ((SpecialAttack) move).getPower(), type_bonus);
 				System.out.println("Move did " + damage + " damage! ");
 				target.takeDamage(damage);
 			}
+		}
+		
+		// If move is a StatModifierMove and targets the enemy pokemon
+		if (move instanceof StatModifierMove && ((StatModifierMove) move).getTarget_self() == false)
+		{
+			// Attack
+			if (move instanceof AttackModifier)
+			{
+				System.out.println(target.getName() + "'s attack was changed!");	
+				target.setBattle_attack(((target.getBase_attack() + target.getIv_values().get(1)) * 2 * (target.getLevel() + ((StatModifierMove) move).getLevel_effect()) / 100 ) + 5);
+			}
+			// Defense
+			if (move instanceof DefenseModifier)
+			{
+				System.out.println(target.getName() + "'s defense was changed!");	
+				target.setBattle_defense((((target.getBase_defense() + target.getIv_values().get(2)) * 2 *((StatModifierMove) move).getLevel_effect()) / 100 ) + 5);
+			}
+			// Special Attack
+			if (move instanceof SpecialAttackModifier)
+			{
+				System.out.println(target.getName() + "'s special attack was changed!");	
+				target.setBattle_special_attack((((target.getBase_special_attack() + target.getIv_values().get(3)) * 2 *((StatModifierMove) move).getLevel_effect()) / 100 ) + 5);
+			}
+			// Special Defense
+			if (move instanceof SpecialDefenseModifier)
+			{
+				System.out.println(target.getName() + "'s special defense was changed!");	
+				target.setBattle_special_defense((((target.getBase_special_defense() + target.getIv_values().get(4)) * 2 *((StatModifierMove) move).getLevel_effect()) / 100 ) + 5);
+			}
+			// Speed
+			if (move instanceof SpeedModifier)
+			{
+				System.out.println(target.getName() + "'s speed was changed!");	
+				target.setBattle_speed((((target.getBase_speed() + target.getIv_values().get(5)) * 2 *((StatModifierMove) move).getLevel_effect()) / 100 ) + 5);
+			}
+			// Accuracy
+			
+			// Evasion
 		}
 	}
 	
@@ -133,8 +175,8 @@ public class BattleHandler {
 		// First half of turn
 		
 		// Display hp
-		System.out.println(left_player.getName() + "\tHP: " + left_player.getCurrent_hp() + " / " + left_player.getCurrent_Max_hp());
-		System.out.println(right_player.getName() + "\tHP: " + right_player.getCurrent_hp() + " / " + right_player.getCurrent_Max_hp());
+		System.out.println(left_player.getName() + "\tHP: " + left_player.getCurrent_hp() + " / " + left_player.getCurrent_max_hp());
+		System.out.println(right_player.getName() + "\tHP: " + right_player.getCurrent_hp() + " / " + right_player.getCurrent_max_hp());
 		System.out.println();
 		
 		// Display moves
@@ -143,7 +185,7 @@ public class BattleHandler {
 		
 		// Get user choice of move to use
 		choice = kb.nextInt();
-		move_used = first.getCurrent_Moves()[choice-1];
+		move_used = first.getCurrent_moves()[choice-1];
 		
 		// Execute the move used
 		useMove(first, second, move_used);
@@ -159,18 +201,18 @@ public class BattleHandler {
 		// Second half of turn
 		
 		// Display hp
-		System.out.println(left_player.getName() + "\tHP: " + left_player.getCurrent_hp() + " / " + left_player.getCurrent_Max_hp());
-		System.out.println(right_player.getName() + "\tHP: " + right_player.getCurrent_hp() + " / " + right_player.getCurrent_Max_hp());
+		System.out.println(left_player.getName() + "\tHP: " + left_player.getCurrent_hp() + " / " + left_player.getCurrent_max_hp());
+		System.out.println(right_player.getName() + "\tHP: " + right_player.getCurrent_hp() + " / " + right_player.getCurrent_max_hp());
 		System.out.println();
 		
 		// Display moves
 		System.out.println("What will " + second.getName() + " do? ");
-		first.displayCurrentMoves();
+		second.displayCurrentMoves();
 		
 		// Get user choice of move to use
 		choice = kb.nextInt();
 		
-		move_used = second.getCurrent_Moves()[choice-1];
+		move_used = second.getCurrent_moves()[choice-1];
 		
 		// Execute the move used
 		useMove(second, first, move_used);

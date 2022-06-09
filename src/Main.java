@@ -27,6 +27,7 @@ public class Main {
 		pokemonList.get(0).displayPokemonInfo();
 		pokemonList.get(0).displayCurrentMoves();
 		System.out.println();
+		
 		pokemonList.get(1).displayPokemonInfo();
 		pokemonList.get(1).displayCurrentMoves();
 		System.out.println();
@@ -34,6 +35,7 @@ public class Main {
 		
 		BattleHandler battle = new BattleHandler(pokemonList.get(0), pokemonList.get(1));
 		battle.startBattle();
+		
 	}
 
 }
