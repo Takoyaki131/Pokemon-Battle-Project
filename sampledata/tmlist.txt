@@ -1,0 +1,12 @@
+PhysAtt/1/Mega Punch/Normal/20/.85/80
+SpAtt/2/Razor Wind/Normal/10/1/80
+AttMod/3/Swords Dance/Normal/20/1/2/true
+PhysAtt/4/Mega Kick/Normal/5/.75/120
+SpAtt/5/Bubble Beam/Water/20/1/65
+SpAtt/6/Water Gun/Water/25/1/40
+SpAtt/7/Ice Beam/Ice/10/1/90
+SpAtt/8/Thunderbolt/Electric/10/1/90
+Weather/9/Rain Dance/Water/5/1/Rain
+SpAtt/10/Fire Blast/Fire/5/85/110
+PhysAtt/11/Rock Slide/Rock/10/90/75
+PhysAtt/12/Tackle/Normal/35/90/35
