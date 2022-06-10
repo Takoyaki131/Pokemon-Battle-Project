@@ -46,9 +46,16 @@ public class Pokemon {
 	private int battle_special_defense;
 	private int battle_speed;
 	
-	// Attributes to determine move success
+	// Other battle related attributes
 	private double battle_accuracy;
 	private double battle_evasion;
+	
+	// Attributes needed for status
+	private int confused_turns = 0;
+	private boolean is_confused;
+	private int sleep_turns = 0;
+	private String battle_status = null;
+	
 	
 	// Constructor
 	public Pokemon(String name, String type_one, String type_two, int base_max_hp, int base_attack, int base_defense,
@@ -70,6 +77,7 @@ public class Pokemon {
 		{
 			this.iv_values.add((int) (Math.random() * 31));
 		}
+		
 	}
 	
 	/* Displays all information about the specific pokemon
@@ -99,6 +107,14 @@ public class Pokemon {
 		System.out.println("Speed:\t\t" + current_speed);
 	}
 	
+	public void displayBattleInfo()
+	{
+		System.out.println("Attack:\t\t" + battle_attack);
+		System.out.println("Defense:\t" + battle_defense);
+		System.out.println("Sp. Atk:\t" + battle_special_attack);
+		System.out.println("Sp. Def:\t" + battle_special_defense);
+		System.out.println("Speed:\t\t" + battle_speed);
+	}
 
 	/* Update the pokemons stats acording to its current level
 	 * Inputs: 	int level - level to set the pokemon at (EX: set to level 50 or 100 for rental battles)
@@ -128,12 +144,7 @@ public class Pokemon {
 		resetBattleStats();
 	}
 	
-	/* Returns the battle stats to its current stats /  stats will be changed during course of a battle
-	 * Inputs:
-	 * none
-	 * Returns:
-	 * none
-	 */
+	// Returns the battle stats to its current stats /  stats will be changed during course of a battle
 	public void resetBattleStats()
 	{
 		this.battle_attack = current_attack;
@@ -143,6 +154,7 @@ public class Pokemon {
 		this.battle_speed = current_speed;
 		this.battle_accuracy = 1.0;
 		this.battle_evasion = 1.0;
+		this.is_confused = false;
 	}
 	
 	// Displays the 4 moves a pokmeon currently knows
@@ -161,21 +173,8 @@ public class Pokemon {
 		}
 	}
 	
-	/* Sets the array containing the tm numbers of moves a pokemon can learn
-	 * Is called during the file loading of a pokemon entry
-	 * Inputs:
-	 * ArrayList<Integer> learnable_moves	- temporary created int array from a line in file
-	 * Returns:
-	 * none
-	 */
-	public void setLearnableMoves(ArrayList<Integer> learnable_moves)
-	{
-		this.learnable_moves = learnable_moves;
-	}
 	
-	/* Sets up the pokemon with 4 random moves it can learn
-	 * 
-	 */
+	// Sets up the pokemon with 4 random moves it can learn
 	public void setRandomMoves(ArrayList<Move> moveList)
 	{
 		int [] tm_set = new int[4]; // 4 element array to hold the the first 4 tm moves a pokmeon can learn
@@ -193,7 +192,6 @@ public class Pokemon {
 				// add move to current_moves when found
 				if(move.getTmNo() == tm_set[i])
 				{
-					System.out.println(move.getName() + " added to " + this.getName() + "'s moveset");
 					this.current_moves[i] = move;
 				}	
 			}
@@ -206,6 +204,7 @@ public class Pokemon {
 		this.current_hp = this.current_hp - damage;
 	}
 	
+	// Accessors and Mutators
 	public ArrayList<Integer> getIv_values() {
 		return iv_values;
 	}
@@ -425,5 +424,36 @@ public class Pokemon {
 	public int getLevel() {
 		return level;
 	}
-	
+
+	public String getBattle_status() {
+		return battle_status;
+	}
+
+	public void setBattle_status(String battle_status) {
+		this.battle_status = battle_status;
+	}
+
+	public int getSleep_turns() {
+		return sleep_turns;
+	}
+
+	public void setSleep_turns(int sleep_turns) {
+		this.sleep_turns = sleep_turns;
+	}
+
+	public boolean getIs_confused() {
+		return is_confused;
+	}
+
+	public void setIs_confused(boolean is_confused) {
+		this.is_confused = is_confused;
+	}
+
+	public int getConfused_turns() {
+		return confused_turns;
+	}
+
+	public void setConfused_turns(int confused_turns) {
+		this.confused_turns = confused_turns;
+	}
 }

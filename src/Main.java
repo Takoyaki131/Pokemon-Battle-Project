@@ -19,8 +19,10 @@ public class Main {
 		pokemonList.get(0).setLevel(TUTORIAL_LEVEL);
 		pokemonList.get(0).setRandomMoves(moveList);
 		
+	
 		pokemonList.get(1).setLevel(TUTORIAL_LEVEL);
 		pokemonList.get(1).setRandomMoves(moveList);
+		
 		
 		// display
 		/*
@@ -33,8 +35,10 @@ public class Main {
 		System.out.println();
 		*/
 		
+		
 		BattleHandler battle = new BattleHandler(pokemonList.get(0), pokemonList.get(1));
 		battle.startBattle();
+		
 		
 	}
 

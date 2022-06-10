@@ -1,10 +1,10 @@
-PhysAtt/1/Tackle/Normal/35/90/35
-SpAtt/2/Ice Beam/Ice/10/100/90
-SpdMod/3/Scary Face/Normal/10/100/2/false
-SpAtt/4/Thunderbolt/Electric/10/100/90
-SpAtt/5/Ancient Power/Rock/5/100/60
-DefMod/6/Tail Whip/Normal/35/100/90/false
-Status/7/Poison Gas/Poison/40/90/Psn
-Status/8/Thunder Wave/Electric/20/90/Par
+PhysAtt/1/Tackle/Normal/35/1/35
+SpAtt/2/Ice Beam/Ice/10/1/90
+SpdMod/3/Scary Face/Normal/10/1/-2/false
+SpAtt/4/Thunderbolt/Electric/10/1/90
+SpAtt/5/Ancient Power/Rock/5/1/60
+DefMod/6/Tail Whip/Normal/35/1/-1/false
+Status/7/Poison Gas/Poison/40/.9/PSN
+Status/8/Thunder Wave/Electric/20/.9/PAR
 SpAttMod/9/Nasty Plot/Psychic/20/1/2/true
-Weather/10/Rain Dance/Water/5/100/Rain
+Weather/10/Rain Dance/Water/5/1/Rain

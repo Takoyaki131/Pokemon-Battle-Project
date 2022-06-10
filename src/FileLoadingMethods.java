@@ -248,10 +248,9 @@ public class FileLoadingMethods {
 		{
 			learnable_moves.add(lineScanner.nextInt());
 		}
-		System.out.println();
 		lineScanner.close();
 		
 		// Set the pokemons learnable moves
-		pokemon.setLearnableMoves(learnable_moves);
+		pokemon.setLearnable_moves(learnable_moves);
 	}
 }
