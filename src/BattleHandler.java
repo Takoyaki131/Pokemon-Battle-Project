@@ -14,8 +14,6 @@ public class BattleHandler {
 	public void startBattle()
 	{
 		// reset stats from a previous battle
-		left_player.resetBattleStats();
-		right_player.resetBattleStats();
 		Battle();
 		left_player.resetBattleStats();
 		right_player.resetBattleStats();
@@ -33,15 +31,518 @@ public class BattleHandler {
 	}
 	
 	/* Determine bonus based on move type -> target_type WORK IN PROGRESS
-	 *  
+	 *  Reference (Generation 2-5 Type Chart): https://pokemondb.net/type/old
 	 */
-	private double getTypeMultiplier(String move_type, String target_type)
+	private double getTypeMultiplier(String move_type, String target_type1, String target_type2)
 	{
-		// Normal 
-		// Fire 
-		// Water 
+		System.out.println(move_type + " vs " + target_type1 + " | " + target_type2);
+		double type_bonus = 1.0;
+		
+		// Normal
+		if (move_type.equals("Normal"))
+		{
+			if(target_type1.equals("Rock") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Special Condition
+			if(target_type1.equals("Ghost")) type_bonus *= 0;
+		}
+		// Fire
+		if (move_type.equals("Fire"))
+		{
+			// Not effective
+			if(target_type1.equals("Fire") || target_type1.equals("Water") || target_type1.equals("Rock") || target_type1.equals("Dragon"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Grass") || target_type1.equals("Ice") || target_type1.equals("Bug") || target_type1.equals("Steel"))
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Water
+		if (move_type.equals("Water"))
+		{
+			// Not effective
+			if(target_type1.equals("Water") || target_type1.equals("Grass") || target_type1.equals("Dragon"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Fire") || target_type1.equals("Ground") || target_type1.equals("Rock"))
+			{
+				type_bonus *= 2.0;
+			}
+		}
 		// Electric
-		return 1.0;
+		if (move_type.equals("Electric"))
+		{
+			// Not effective
+			if(target_type1.equals("Electric") || target_type1.equals("Grass") || target_type1.equals("Dragon"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Water") || target_type1.equals("Flying"))
+			{
+				type_bonus *= 2.0;
+			}
+			// Special Condition
+			if(target_type1.equals("Ground")) type_bonus *= 0;
+		}
+		// Grass
+		if (move_type.equals("Grass"))
+		{
+			// Not effective
+			if(target_type1.equals("Fire") || target_type1.equals("Grass") || target_type1.equals("Poison") || target_type1.equals("Flying") 
+					|| target_type1.equals("Bug") || target_type1.equals("Dragon") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Water") || target_type1.equals("Ground") || target_type1.equals("Rock"))
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Ice
+		if (move_type.equals("Ice"))
+		{
+			// Not effective
+			if(target_type1.equals("Fire") || target_type1.equals("Water") || target_type1.equals("Ice") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Grass") || target_type1.equals("Ground") || target_type1.equals("Flying") || target_type1.equals("Dragon"))
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Fighting
+		if (move_type.equals("Fighting"))
+		{
+			// Not effective
+			if(target_type1.equals("Poison") || target_type1.equals("Flying") || target_type1.equals("Psychic") || target_type1.equals("Bug"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Normal") || target_type1.equals("Ice") || target_type1.equals("Rock") || target_type1.equals("Dark") || target_type1.equals("Steel"))
+			{
+				type_bonus *= 2.0;
+			}
+			// Special Condition
+			if(target_type1.equals("Ghost")) type_bonus *= 0;
+		}
+		// Poison
+		if (move_type.equals("Poison"))
+		{
+			// Not effective
+			if(target_type1.equals("Poison") || target_type1.equals("Ground") || target_type1.equals("Rock") || target_type1.equals("Ghost"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Grass"))
+			{
+				type_bonus *= 2.0;
+			}
+			// Special Condition
+			if(target_type1.equals("Steel")) type_bonus *= 0;
+		}
+		// Ground
+		if (move_type.equals("Ground"))
+		{
+			// Not effective
+			if(target_type1.equals("Grass") || target_type1.equals("Bug"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Fire") || target_type1.equals("Electric") || target_type1.equals("Poison") || target_type1.equals("Rock") || target_type1.equals("Steel")) 
+			{
+				type_bonus *= 2.0;
+			}
+			// Special Condition
+			if(target_type1.equals("Flying")) type_bonus *= 0;
+		}
+		// Flying
+		if (move_type.equals("Flying"))
+		{
+			// Not effective
+			if(target_type1.equals("Electric") || target_type1.equals("Rock"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Grass") || target_type1.equals("Fighting") || target_type1.equals("Bug")) 
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Psychic
+		if (move_type.equals("Psychic"))
+		{
+			// Not effective
+			if(target_type1.equals("Bug") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Fighting") || target_type1.equals("Poison")) 
+			{
+				type_bonus *= 2.0;
+			}
+			// Special Condition
+			if(target_type1.equals("Dark")) type_bonus *= 0;
+		}
+		// Bug
+		if (move_type.equals("Bug"))
+		{
+			// Not effective
+			if(target_type1.equals("Fire") || target_type1.equals("Fighting") || target_type1.equals("Poison") || target_type1.equals("Flying") 
+					|| target_type1.equals("Ghost") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Psychic") || target_type1.equals("Grass") || target_type1.equals("Dark")) 
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Rock
+		if (move_type.equals("Rock"))
+		{
+			// Not effective
+			if(target_type1.equals("Fighting") || target_type1.equals("Ground") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Fire") || target_type1.equals("Ice") || target_type1.equals("Flying") || target_type1.equals("Bug")) 
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Ghost
+		if (move_type.equals("Ghost"))
+		{
+			// Not effective
+			if(target_type1.equals("Dark") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Psychic") || target_type1.equals("Ghost")) 
+			{
+				type_bonus *= 2.0;
+			}
+			// Special Condition
+			if(target_type1.equals("Normal")) type_bonus *= 0;
+		}
+		// Dragon
+		if (move_type.equals("Dragon"))
+		{
+			// Not effective
+			if(target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Dragon")) 
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Dark
+		if (move_type.equals("Dark"))
+		{
+			// Not effective
+			if(target_type1.equals("Fighting") || target_type1.equals("Dark") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Ghost") || target_type1.equals("Psychic")) 
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		// Steel
+		if (move_type.equals("Steel"))
+		{
+			// Not effective
+			if(target_type1.equals("Fire") || target_type1.equals("Water") || target_type1.equals("Electric") || target_type1.equals("Steel"))
+			{
+				type_bonus *= .5;
+			}
+			// Super effective
+			if(target_type1.equals("Rock") || target_type1.equals("Ice")) 
+			{
+				type_bonus *= 2.0;
+			}
+		}
+		
+		// Type 2 Check
+		if(!target_type2.equals(""))
+		{
+			// Normal
+			if (move_type.equals("Normal"))
+			{
+				if(target_type2.equals("Rock") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Special Condition
+				if(target_type2.equals("Ghost")) type_bonus *= 0;
+			}
+			// Fire
+			if (move_type.equals("Fire"))
+			{
+				// Not effective
+				if(target_type2.equals("Fire") || target_type2.equals("Water") || target_type2.equals("Rock") || target_type2.equals("Dragon"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Grass") || target_type2.equals("Ice") || target_type2.equals("Bug") || target_type2.equals("Steel"))
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Water
+			if (move_type.equals("Water"))
+			{
+				// Not effective
+				if(target_type2.equals("Water") || target_type2.equals("Grass") || target_type2.equals("Dragon"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Fire") || target_type2.equals("Ground") || target_type2.equals("Rock"))
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Electric
+			if (move_type.equals("Electric"))
+			{
+				// Not effective
+				if(target_type2.equals("Electric") || target_type2.equals("Grass") || target_type2.equals("Dragon"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Water") || target_type2.equals("Flying"))
+				{
+					type_bonus *= 2.0;
+				}
+				// Special Condition
+				if(target_type2.equals("Ground")) type_bonus *= 0;
+			}
+			// Grass
+			if (move_type.equals("Grass"))
+			{
+				// Not effective
+				if(target_type2.equals("Fire") || target_type2.equals("Grass") || target_type2.equals("Poison") || target_type2.equals("Flying") 
+						|| target_type2.equals("Bug") || target_type2.equals("Dragon") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Water") || target_type2.equals("Ground") || target_type2.equals("Rock"))
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Ice
+			if (move_type.equals("Ice"))
+			{
+				// Not effective
+				if(target_type2.equals("Fire") || target_type2.equals("Water") || target_type2.equals("Ice") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Grass") || target_type2.equals("Ground") || target_type2.equals("Flying") || target_type2.equals("Dragon"))
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Fighting
+			if (move_type.equals("Fighting"))
+			{
+				// Not effective
+				if(target_type2.equals("Poison") || target_type2.equals("Flying") || target_type2.equals("Psychic") || target_type2.equals("Bug"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Normal") || target_type2.equals("Ice") || target_type2.equals("Rock") || target_type2.equals("Dark") || target_type2.equals("Steel"))
+				{
+					type_bonus *= 2.0;
+				}
+				// Special Condition
+				if(target_type2.equals("Ghost")) type_bonus *= 0;
+			}
+			// Poison
+			if (move_type.equals("Poison"))
+			{
+				// Not effective
+				if(target_type2.equals("Poison") || target_type2.equals("Ground") || target_type2.equals("Rock") || target_type2.equals("Ghost"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Grass"))
+				{
+					type_bonus *= 2.0;
+				}
+				// Special Condition
+				if(target_type2.equals("Steel")) type_bonus *= 0;
+			}
+			// Ground
+			if (move_type.equals("Ground"))
+			{
+				// Not effective
+				if(target_type2.equals("Grass") || target_type2.equals("Bug"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Fire") || target_type2.equals("Electric") || target_type2.equals("Poison") || target_type2.equals("Rock") || target_type2.equals("Steel")) 
+				{
+					type_bonus *= 2.0;
+				}
+				// Special Condition
+				if(target_type2.equals("Flying")) type_bonus *= 0;
+			}
+			// Flying
+			if (move_type.equals("Flying"))
+			{
+				// Not effective
+				if(target_type2.equals("Electric") || target_type2.equals("Rock"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Grass") || target_type2.equals("Fighting") || target_type2.equals("Bug")) 
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Psychic
+			if (move_type.equals("Psychic"))
+			{
+				// Not effective
+				if(target_type2.equals("Bug") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Fighting") || target_type2.equals("Poison")) 
+				{
+					type_bonus *= 2.0;
+				}
+				// Special Condition
+				if(target_type2.equals("Dark")) type_bonus *= 0;
+			}
+			// Bug
+			if (move_type.equals("Bug"))
+			{
+				// Not effective
+				if(target_type2.equals("Fire") || target_type2.equals("Fighting") || target_type2.equals("Poison") || target_type2.equals("Flying") 
+						|| target_type2.equals("Ghost") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Psychic") || target_type2.equals("Grass") || target_type2.equals("Dark")) 
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Rock
+			if (move_type.equals("Rock"))
+			{
+				// Not effective
+				if(target_type2.equals("Fighting") || target_type2.equals("Ground") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Fire") || target_type2.equals("Ice") || target_type2.equals("Flying") || target_type2.equals("Bug")) 
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Ghost
+			if (move_type.equals("Ghost"))
+			{
+				// Not effective
+				if(target_type2.equals("Dark") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Psychic") || target_type2.equals("Ghost")) 
+				{
+					type_bonus *= 2.0;
+				}
+				// Special Condition
+				if(target_type2.equals("Normal")) type_bonus *= 0;
+			}
+			// Dragon
+			if (move_type.equals("Dragon"))
+			{
+				// Not effective
+				if(target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Dragon")) 
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Dark
+			if (move_type.equals("Dark"))
+			{
+				// Not effective
+				if(target_type2.equals("Fighting") || target_type2.equals("Dark") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Ghost") || target_type2.equals("Psychic")) 
+				{
+					type_bonus *= 2.0;
+				}
+			}
+			// Steel
+			if (move_type.equals("Steel"))
+			{
+				// Not effective
+				if(target_type2.equals("Fire") || target_type2.equals("Water") || target_type2.equals("Electric") || target_type2.equals("Steel"))
+				{
+					type_bonus *= .5;
+				}
+				// Super effective
+				if(target_type2.equals("Rock") || target_type2.equals("Ice")) 
+				{
+					type_bonus *= 2.0;
+				}
+			}
+		}
+		
+		// No second type, return type bonus
+		System.out.println("Result Type Multiplier: " + type_bonus);
+		return type_bonus;
 	}
 	
 	/* Checks if a pokemon is able to use a move through confusion or status condition
@@ -142,10 +643,22 @@ public class BattleHandler {
 		}
 		
 		// Determine weakness/resistance value WIP
-		double type_bonus = getTypeMultiplier(move.getType(), target.getType_one());
+		double type_multiplier = getTypeMultiplier(move.getType(), target.getType_one(), target.getType_two());
 		
-		
-		// Determine move class, move class dictates what pokmeon stat to use in calculation
+		if(type_multiplier == 0)
+		{
+			System.out.println("The move had no effect.");
+			return;
+		}
+		if(type_multiplier < 1.0 && type_multiplier > 0)
+		{
+			System.out.println("Its not very effective...");
+		}
+		if(type_multiplier > 1.0)
+		{
+			System.out.println("Its super effective!");
+		}
+
 		int damage; // variable holding the damage dealt by move
 		
 		// If move is an attacking move
@@ -154,7 +667,7 @@ public class BattleHandler {
 			// Physical Attack
 			if(move instanceof PhysicalAttack)
 			{
-				damage = calcDamage(user.getLevel(), user.getBattle_attack(), target.getBattle_defense(), ((PhysicalAttack) move).getPower(), type_bonus);
+				damage = calcDamage(user.getLevel(), user.getBattle_attack(), target.getBattle_defense(), ((PhysicalAttack) move).getPower(), type_multiplier);
 				/* Check if there is a burn status of user pokem
 				 * 	- burn 		1/16 of maximun hp and halves physical attack damage
 				 */
@@ -170,7 +683,7 @@ public class BattleHandler {
 			// Special Attack
 			if(move instanceof SpecialAttack)
 			{
-				damage = calcDamage(user.getLevel(), user.getBattle_special_attack(), target.getBattle_special_defense(), ((SpecialAttack) move).getPower(), type_bonus);
+				damage = calcDamage(user.getLevel(), user.getBattle_special_attack(), target.getBattle_special_defense(), ((SpecialAttack) move).getPower(), type_multiplier);
 				System.out.println("Move did " + damage + " damage! ");
 				target.takeDamage(damage);
 			}

@@ -1,7 +1,7 @@
 PhysAtt/1/Tackle/Normal/35/1/35
 SpAtt/2/Ice Beam/Ice/10/1/90
 SpdMod/3/Scary Face/Normal/10/1/-2/false
-SpAtt/4/Thunderbolt/Electric/10/1/90
+SpAtt/4/Thunderbolt/Fire/10/1/90
 SpAtt/5/Ancient Power/Rock/5/1/60
 DefMod/6/Tail Whip/Normal/35/1/-1/false
 Status/7/Poison Gas/Poison/40/.9/PSN

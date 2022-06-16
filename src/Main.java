@@ -25,15 +25,15 @@ public class Main {
 		
 		
 		// display
-		/*
+		
 		pokemonList.get(0).displayPokemonInfo();
-		pokemonList.get(0).displayCurrentMoves();
+		//pokemonList.get(0).displayCurrentMoves();
 		System.out.println();
 		
 		pokemonList.get(1).displayPokemonInfo();
-		pokemonList.get(1).displayCurrentMoves();
+		//pokemonList.get(1).displayCurrentMoves();
 		System.out.println();
-		*/
+		
 		
 		
 		BattleHandler battle = new BattleHandler(pokemonList.get(0), pokemonList.get(1));
