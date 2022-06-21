@@ -5,7 +5,6 @@ Trying to use only my own thinking to create how a pokemon battle is coded. Incl
 Completed Objectives
 - created basic pokemon class
 - created basic pokemon move tree
-- Include all requirements of a pokemon battle
   - COMPLETED FEATURES OF BATTLE
   - Confused *requires testing
   - Type multipliers *requires testing
@@ -15,6 +14,15 @@ Completed Objectives
  
 Current Goals
 - Include all requirements of a pokemon battle *INP
+  - REMAINING FEATURES OF BATTLE (Likely to be added later after reworking classes)
+  - Embargo
+  - Encore
+  - Flinch
+  - Heal Block
+  - Infatuation
+  - Torment
+  - Bound
+  - Nightmare
 - Work on a pokmeon battle handler (view and customize a pokemon)
 - Standardize comments for each method
 
@@ -22,5 +30,7 @@ Future Goals
 - Rework whole pokemon class (Individual Classes for each pokemon)
 - Possibly rework move classes (Individual Classes for each move)
 - Introduce Item class
+  - Berries
+  - Potions
 - Introduce Trainer class
 - Convert console to a GUI display
