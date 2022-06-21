@@ -4,6 +4,7 @@ Using pokemon wikis as references to some game mechanics. Included the basics fr
 
 Current Objective
 - Rework whole pokemon class (Individual Classes for each pokemon)
+  - Redo UML Diagrams
 
 Completed Objectives
 - created basic pokemon class
