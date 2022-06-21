@@ -1,4 +1,4 @@
-package pokemon;
+package move_tree;
 
 public class StatusMove extends Move {
 	

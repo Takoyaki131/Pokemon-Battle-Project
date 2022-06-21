@@ -1,6 +1,8 @@
 import pokemon.*;
 import java.util.ArrayList;
 
+import move_tree.Move;
+
 public class Main {
 
 	public static void main(String[] args) {

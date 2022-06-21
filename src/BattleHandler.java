@@ -1,6 +1,18 @@
 import pokemon.*;
 import java.util.Scanner;
 
+import move_tree.AttackModifier;
+import move_tree.AttackMove;
+import move_tree.DefenseModifier;
+import move_tree.Move;
+import move_tree.PhysicalAttack;
+import move_tree.SpecialAttack;
+import move_tree.SpecialAttackModifier;
+import move_tree.SpecialDefenseModifier;
+import move_tree.SpeedModifier;
+import move_tree.StatModifierMove;
+import move_tree.StatusMove;
+
 public class BattleHandler {
 	private Pokemon left_player;
 	private Pokemon right_player;

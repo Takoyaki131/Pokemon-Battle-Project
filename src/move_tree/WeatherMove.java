@@ -1,4 +1,4 @@
-package pokemon;
+package move_tree;
 
 public class WeatherMove extends Move{
 	private String target_weather;

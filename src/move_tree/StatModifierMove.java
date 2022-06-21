@@ -1,4 +1,4 @@
-package pokemon;
+package move_tree;
 
 public abstract class StatModifierMove extends Move{
 	private int level_effect;

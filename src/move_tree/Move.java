@@ -1,4 +1,4 @@
-package pokemon;
+package move_tree;
 
 public abstract class Move {
 	// Class Attributes

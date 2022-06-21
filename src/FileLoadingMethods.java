@@ -2,6 +2,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import move_tree.AccuracyModifier;
+import move_tree.AttackModifier;
+import move_tree.DefenseModifier;
+import move_tree.EvasionModifier;
+import move_tree.Move;
+import move_tree.PhysicalAttack;
+import move_tree.SpecialAttack;
+import move_tree.SpecialAttackModifier;
+import move_tree.SpecialDefenseModifier;
+import move_tree.SpeedModifier;
+import move_tree.StatusMove;
+import move_tree.WeatherMove;
 import pokemon.*;
 
 

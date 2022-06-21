@@ -1,6 +1,8 @@
 package pokemon;
 import java.util.ArrayList;
 
+import move_tree.Move;
+
 /* Class representation of a pokemon
  * 
  */

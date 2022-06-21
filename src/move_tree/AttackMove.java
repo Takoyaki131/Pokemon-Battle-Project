@@ -1,4 +1,4 @@
-package pokemon;
+package move_tree;
 
 public abstract class AttackMove extends Move{
 	protected int power;

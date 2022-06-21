@@ -1,4 +1,4 @@
-package pokemon;
+package move_tree;
 
 public class SpecialAttackModifier extends StatModifierMove{
 
